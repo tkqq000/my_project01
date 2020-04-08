@@ -85,11 +85,8 @@ export default {};
   margin-right: 10px;
 }
 .el-card_04 p {
-    font-weight: 700;
-    color: rgb(32, 35, 50);
-    font-size: 18px;
-  }
-
-
-
+  font-weight: 700;
+  color: rgb(32, 35, 50);
+  font-size: 18px;
+}
 </style>

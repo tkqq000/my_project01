@@ -90,7 +90,8 @@
       <el-main>
         <!-- 路由占位符 -->
         <router-view></router-view>
-        
+        <!-- 版权信息 -->
+        <div class="copyright">2018-2022 © We do Internet of Things</div>
       </el-main>
     </el-container>
   </el-container>
@@ -206,6 +207,12 @@ export default {
 //main部分
 .el-main {
   background-color: #edeeef;
-
 }
+// 版权信息
+.copyright {
+  text-align: center;
+  padding: 24px 50px;
+  font-size: 14px;
+  color: #515a6e;
+  }
 </style>

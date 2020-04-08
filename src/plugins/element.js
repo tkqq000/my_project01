@@ -16,7 +16,16 @@ import {
     Row,
     Col,
     Card,
-    Icon
+    Icon,
+    Select,
+    Option,
+    Link,
+    Table,
+    TableColumn,
+    pagination,
+    checkbox,
+    checkboxGroup,
+    DatePicker
 } from 'element-ui'
 
 Vue.use(Button)
@@ -35,6 +44,23 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Card)
 Vue.use(Icon)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(Link)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(pagination)
+Vue.use(checkbox)
+Vue.use(checkboxGroup)
+Vue.use(DatePicker)
+
+
+
+
+
+
+
+
 
 
 
