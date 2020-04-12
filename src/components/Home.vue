@@ -3,7 +3,7 @@
         <el-row :gutter="12">
             <el-card shadow="hover" class="el-card_01 box">
                 <div class="el-card_01_greeting">
-                  <h2>Hi,User!</h2>
+                  <h2>{{name}} ,你好！</h2>
                 </div>
                 <div>
                   <h1>设备预警信息</h1>
@@ -30,7 +30,17 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      name: ""
+    };
+  },
+  methods: {},
+  mounted() {
+    this.name = window.sessionStorage.getItem("name");
+  }
+};
 </script>
 
 <style lang="less" scoped>

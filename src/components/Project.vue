@@ -22,11 +22,11 @@
     <!-- 表格table部分 -->
     <div class="table">
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="P_name" label="项目名称" width="180"></el-table-column>
-        <el-table-column prop="P_positon" label="项目地址" width="180"></el-table-column>
-        <el-table-column prop="P_scale" label="项目规模"></el-table-column>
-        <el-table-column prop="P_price" label="项目造价"></el-table-column>
-        <el-table-column prop="P_status" label="项目状态"></el-table-column>
+        <el-table-column prop="name" label="项目名称" width="180"></el-table-column>
+        <el-table-column prop="address" label="项目地址" width="180"></el-table-column>
+        <el-table-column prop="scale" label="项目规模"></el-table-column>
+        <el-table-column prop="cost" label="项目造价"></el-table-column>
+        <el-table-column prop="status" label="项目状态"></el-table-column>
         <el-table-column prop="operate" label="操作"></el-table-column>
       </el-table>
     </div>
@@ -55,28 +55,57 @@ export default {
       // table数据
       tableData: [
         {
-          P_name: "",
-          P_positon: "",
-          P_scale: "",
-          P_price: "",
-          P_status:"",
+          name: "",
+          address: "",
+          scale: "",
+          cost: "",
+          P_status: "",
           operate: ""
         }
       ],
       // page 分页
       currentPage: 1,
-      value1: "",
-      value2: ""
+      sizeValue: "",
+      currentPageNum: "10"
     };
   },
   methods: {
     // 分页方法
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
+      this.currentPageNum = Number(val);
+      console.log(this.currentPageNum);
+      this.getData();
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
+    },
+    async getData() {
+      //发起请求
+      let result = await this.$axios.post("user/projects", {
+        userName: window.sessionStorage.getItem("username"),
+        offset: "0", // 查看起始位置
+        limit: this.currentPageNum // 每一页大小
+      });
+      let list = result.data.data.items;
+      console.log(list);
+      //如果接口给的数据是数组
+      var that = this;
+      for (let index = 0; index < list.length; index++) {
+        console.log(that.list);
+        const element = {};
+        element.name = list[index].name;
+        element.address = list[index].address;
+        element.cost = list[index].cost;
+        console.log(element);
+        this.tableData.push(element);
+        delete this.tableData[0];
+      }
+      console.log(list);
     }
+  },
+  mounted() {
+    this.getData();
   }
 };
 </script>
@@ -84,7 +113,7 @@ export default {
 <style lang="less" scoped>
 // 最外层el-card样式
 .el-card {
-  height: 500px;
+  height: 100%;
   width: 100%;
 }
 // headBar 顶栏

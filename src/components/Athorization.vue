@@ -13,19 +13,19 @@
       </div>
       <!-- 创建新项目 -->
       <div class="device_summary_importProject">
-        <el-button type="primary" size="mini">+ 授权用户</el-button>
+        <el-button type="primary" size="mini" @click="getTableData">+ 授权用户</el-button>
       </div>
     </div>
     <!-- 表格table部分 -->
     <div class="table">
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="username" label="用户名称" width="180"></el-table-column>
+        <el-table-column prop="name" label="用户名称" width="180"></el-table-column>
         <el-table-column prop="email" label="邮箱" width="180"></el-table-column>
-        <el-table-column prop="contact" label="联系方式"></el-table-column>
-        <el-table-column prop="role" label="用户角色"></el-table-column>
+        <el-table-column prop="mobile" label="联系方式"></el-table-column>
+        <el-table-column prop="roleName" label="用户角色"></el-table-column>
         <el-table-column prop="operate" label="操作">
           <el-link :underline="false">
-            <div class="deviceStatus_btn">删除</div>
+            <div class="deviceStatus_btn" @click="deleteUser">删除</div>
           </el-link>
         </el-table-column>
       </el-table>
@@ -55,10 +55,10 @@ export default {
       // table数据
       tableData: [
         {
-          username: "",
+          name: "",
           email: "",
-          contact: "",
-          role: "",
+          mobile: "",
+          roleName: "",
           operate: ""
         }
       ],
@@ -75,7 +75,35 @@ export default {
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
+    },
+    async getTableData() {
+      let result = await this.$axios.post("user/info");
+      var list = result.data.data;
+      var obj = {};
+      //如果接口给的数据是数组
+      // for (let index = 0; index < list.length; index++) {
+      //   console.log(that.list);
+      //   const element = {};
+      //   element =list[index];
+      //   console.log(element);
+      //   obj.username = element.username;
+      //   this.tableData.push(obj);
+      // }
+      obj.name = list.name;
+      obj.email = list.email;
+      obj.mobile = list.mobile;
+      obj.roleName = list.roleName;
+      this.tableData.push(obj);
+      delete this.tableData[0];
+    },
+    deleteUser(){
+      console.log(11);
+      // this.$parent.remove();
+      
     }
+  },
+  mounted() {
+    this.getTableData();
   }
 };
 </script>

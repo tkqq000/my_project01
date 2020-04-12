@@ -21,34 +21,35 @@ const router = new Router({
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
     {
-      path: '/Index', component: Index,redirect:'/Home',
-      children: [{ path: '/device', component: Device },
-      { path: '/Home', component: Home },
-      { path: '/Alert', component: Alert },
-      { path: '/Rules', component: Rules },
-      { path: '/Wulian', component: Wulian },
-      { path: '/Project', component: Project },
-      { path: '/Athorization', component: Athorization },
-      { path: '/Log', component: Log },
-      { path: '/Info', component: Info },
-
-      ]
+      path: '/Index', component: Index, redirect: '/Home',
+      children:
+        [
+          { path: '/device', component: Device },
+          { path: '/Home', component: Home },
+          { path: '/Alert', component: Alert },
+          { path: '/Rules', component: Rules },
+          { path: '/Wulian', component: Wulian },
+          { path: '/Project', component: Project },
+          { path: '/Athorization', component: Athorization },
+          { path: '/Log', component: Log },
+          { path: '/Info', component: Info },
+        ]
     }
   ]
 })
 
 // 挂载路由导航守卫
-router.beforeEach((to, from, next) => {
-  // to 将要访问的路径
-  // from 代表从哪个路径跳转而来
-  // next 是一个函数，表示放行
-  //     next()  放行    next('/login')  强制跳转
+// router.beforeEach((to, from, next) => {
+// to 将要访问的路径
+// from 代表从哪个路径跳转而来
+// next 是一个函数，表示放行
+//     next()  放行    next('/login')  强制跳转
 
-  if (to.path === '/login') return next()
-  // 获取token
-  const tokenStr = window.sessionStorage.getItem('token')
-  if (!tokenStr) return next('/login')
-  next()
-})
+// if (to.path === '/login') return next()
+// 获取token
+//   const tokenStr = window.sessionStorage.getItem('token')
+//   if (!tokenStr) return next('/login')
+//   next()
+// })
 
 export default router

@@ -25,7 +25,10 @@ import {
     pagination,
     checkbox,
     checkboxGroup,
-    DatePicker
+    DatePicker,
+    Dropdown,
+    DropdownMenu,
+    DropdownItem,
 } from 'element-ui'
 
 Vue.use(Button)
@@ -53,12 +56,9 @@ Vue.use(pagination)
 Vue.use(checkbox)
 Vue.use(checkboxGroup)
 Vue.use(DatePicker)
-
-
-
-
-
-
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
 
 
 
