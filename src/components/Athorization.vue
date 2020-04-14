@@ -25,7 +25,7 @@
         <el-table-column prop="roleName" label="用户角色"></el-table-column>
         <el-table-column prop="operate" label="操作">
           <el-link :underline="false">
-            <div class="deviceStatus_btn" @click="deleteUser">删除</div>
+            <div class="deviceStatus_btn" @click="deleteUser($event)">删除</div>
           </el-link>
         </el-table-column>
       </el-table>
@@ -79,6 +79,8 @@ export default {
     async getTableData() {
       let result = await this.$axios.post("user/info");
       var list = result.data.data;
+      // console.log(list);
+      
       var obj = {};
       //如果接口给的数据是数组
       // for (let index = 0; index < list.length; index++) {
@@ -96,10 +98,10 @@ export default {
       this.tableData.push(obj);
       delete this.tableData[0];
     },
-    deleteUser(){
-      console.log(11);
+    deleteUser(event){
+      this.$message.error('还没做这个功能呢！');
+      // delete event.target.parentNode;
       // this.$parent.remove();
-      
     }
   },
   mounted() {

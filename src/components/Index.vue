@@ -41,7 +41,6 @@
           :default-active="activeIndex"
           class="nav_menu"
           mode="horizontal"
-          @select="handleSelect"
           text-color="#909399"
           active-text-color="#fff"
           background-color="#17233d"
@@ -128,13 +127,19 @@ export default {
     async logout() {
       // window.sessionStorage.clear();
       let result = await this.$axios.post("user/logout");
-      console.log(result);
+      // console.log(result.data);
+      
+      if(result.data.errcode == 0 ){
+        this.$message.success(result.data.msg);
+      }else{
+        this.$message.error(result.data.msg)
+      }
       this.$router.push("/login");
       window.sessionStorage.clear();
     },
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    },
+    // handleSelect(key, keyPath) {
+    //   console.log(key, keyPath);
+    // },
     handleCommand(command) {
       if(command == 'c'){
         this.logout();
@@ -160,6 +165,11 @@ export default {
 // home_container
 .home_container {
   height: 100%;
+  //挤出滚动条
+  width: 100%;
+  //隐藏外面的滚动条
+  // overflow: hidden;
+
 }
 // header部分
 .el-header {

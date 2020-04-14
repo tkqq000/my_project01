@@ -68,28 +68,35 @@ export default {
     // login(){
     //     this.$router.push("/Index");
     // }
-    async login() {
-      let result = await this.$axios.post("user/login", {
-        userName: this.loginForm.username,
-        password: this.loginForm.password
-      });
 
-      if (result.data.errcode == 0) {
-        this.$message.success(result.data.msg);
-        this.$axios.defaults.headers["authorization"] = result.data.data.token;
-        // 1. 将登录成功之后的 token，保存到客户端的 sessionStorage 中
-        //   1.1 项目中出了登录之外的其他API接口，必须在登录之后才能访问
-        //   1.2 token 只应在当前网站打开期间生效，所以将 token 保存在 sessionStorage 中
-        window.sessionStorage.setItem("token", result.data.data.token);
-        let result1 = await this.$axios.post("user/info");
-        console.log(result1.data.data);
-        window.sessionStorage.setItem("username", result1.data.data.username);
-        window.sessionStorage.setItem("name", result1.data.data.name);
+    //当接口没有打开 => 打开以下
+    login () {
         this.$router.push("/Index");
-      } else if (result.data.errcode == 1) {
-        this.$message.error(result.data.msg);
-      }
     }
+    
+    //当接口打开时 => 打开登录验证
+    // async login() {
+    //   let result = await this.$axios.post("user/login", {
+    //     userName: this.loginForm.username,
+    //     password: this.loginForm.password
+    //   });
+
+    //   if (result.data.errcode == 0) {
+    //     this.$message.success(result.data.msg);
+    //     this.$axios.defaults.headers["authorization"] = result.data.data.token;
+    //     // 1. 将登录成功之后的 token，保存到客户端的 sessionStorage 中
+    //     //   1.1 项目中出了登录之外的其他API接口，必须在登录之后才能访问
+    //     //   1.2 token 只应在当前网站打开期间生效，所以将 token 保存在 sessionStorage 中
+    //     window.sessionStorage.setItem("token", result.data.data.token);
+    //     let result1 = await this.$axios.post("user/info");
+    //     console.log(result1.data.data);
+    //     window.sessionStorage.setItem("username", result1.data.data.username);
+    //     window.sessionStorage.setItem("name", result1.data.data.name);
+    //     this.$router.push("/Index");
+    //   } else if (result.data.errcode == 1) {
+    //     this.$message.error(result.data.msg);
+    //   }
+    // }
   }
 };
 

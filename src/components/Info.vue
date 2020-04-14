@@ -61,7 +61,7 @@ export default {};
 .main {
   position: absolute;
   position: relative;
-  left: 17px;
+  // left: 17px;
   .main_first,
   .main_sencond,
   .main_third {
